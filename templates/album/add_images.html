@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    .custom-input {
+        width: 500px; 
+    }
+    .errorlist {
+    list-style: none; 
+    padding-left: 0; 
+    margin-top: 0; 
+    }
+</style>
+<div class="mt-4 container" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div class=" my-4">
+        <h2>Create Little Memories Here <i class="fa-regular fa-face-smile"></i></h2>
+        <br>
+        <hr>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            
+            <br>
+            <button class="my-3 btn btn-success btn-sm" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

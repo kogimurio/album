@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h3>You Have Been Logout</h3>
+    <div class="border-top pt-3" style="min-height: 65vh;">
+        <small class="text-muted">
+            <a href="{% url 'login' %}" class="btn btn-outline-primary">Login Again</a>
+        </small>
+    </div>
+{% endblock %}

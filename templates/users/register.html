@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    .custom-input {
+        width: 600px;
+    }
+</style>
+    <div class="container mt-4" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div class="mt-4">
+            <h2 class="text-center">Register Here</h2><hr>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-outline-info" value="Submit">
+        </form>
+        <div><hr>
+            <small>Already Have An Account  <a href="{% url 'login' %}" class="btn btn-outline-secondary m-2">Login</a></small>
+        </div>
+        
+        </div>
+        
+    </div>
+{% endblock %}
+

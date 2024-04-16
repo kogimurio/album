@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="mt-4 container" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div class="m-5">
+        <h2>Delete Album</h2>
+        <p>Are you sure you want to delete the album "{{ object.title }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn btn-sm btn-danger">
+        </form>
+        <a href="{% url 'gallery' %}" class="btn btn-sm btn-success my-3">Cancel</a>
+    </div>
+</div>
+{% endblock %}

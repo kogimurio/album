@@ -1,0 +1,39 @@
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between">
+      <div>
+        <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+  
+        <ul class="nav col-12 col-lg-auto mb-2 justify-content-start flex-column flex-lg-row">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-white"><i class="fa-solid fa-house"></i></a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+      </div>
+        <div class="text-end align-items-end">
+        {% if user.is_authenticated %}
+            <a href="{% url 'gallery' %}" class="btn btn-outline-success"> Gallery <i class="fa-regular fa-image"></i></a>
+            <a href="{% url 'profile' user.username %}" class="btn btn-outline-light">{{request.user.username}} <i class="fa-solid fa-user"></i></a>
+            <a href="{% url 'logout' %}" class="btn btn-outline-info"> Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+            {{request.user.username}}
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-primary"> Login <i class="fa-solid fa-right-to-bracket"></i></a>
+            <a href="{% url 'register' %}" class="btn btn-outline-info"> Register</a>
+        {% endif %}
+        </div>
+      
+    </div>
+</nav>
+</div>
+
+
+  
+
+
+
+
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    .custom-input {
+        width: 500px; 
+    }
+    .errorlist {
+    list-style: none; 
+    padding-left: 0; 
+    margin-top: 0; 
+    }
+</style>
+<div class="mt-4 container" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div class="mt-4">
+        <form method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="rb-4 text-center"><h2>Login Here</h2></legend><hr>
+                {{form.as_p}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info mb-3" type="submit">Login</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An Account? <a href="{% url 'register' %}" class="m-2 btn btn-outline-primary">Register Now</a>
+            </small>
+            <br><hr>
+            <small class="text-muted">
+                Forget Password?<a href="#" class="btn btn-outline-info m-2">Reset</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
