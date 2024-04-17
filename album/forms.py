@@ -26,7 +26,7 @@ class AlbumForm(forms.ModelForm):
                'class': 'form-control custom-input',
                 'placeholder': 'Nairobi',  
             }),
-            'display_image': forms.ClearableFileInput(attrs={
+            'banner': forms.ClearableFileInput(attrs={
                 'class': 'form-control custom-input',
                 'placeholder': 'Select banner image',
             }),

@@ -91,50 +91,36 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Albums</h1>
+        <h1 class="fw-light">Gallery Detail View</h1>
+        <br>
         <hr>
-        <p>
-            <a href="{% url 'addimages' %}" class="btn btn-success btn-sm p-4">Click Me To Add Those Little Memories <i class="fa-regular fa-face-smile"></i></a> 
-        </p>
+        <br>
+        <h4>{{galleryobj.name}}</h4>
+
         <p class="lead text-body-secondary">
-            Babies Precious Life Memories Journey
+            {% for gallery in gallery %}
+                <h4>{{gallery.title}}</h4>
+            {% endfor %}
         </p>
       </div>
     </div>
   </section>
- 
+
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for gallery in gallery %}
-        {% if gallery.author == request.user %}
+        {% for gimage in galleryobj.images_set.all %}
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="{{gallery.banner.url}}" class="img-thumbnail" alt=""></text></svg>
-            <div class="card-body">
-                <p class="card-text tw-3">{{gallery.title}}</p>
-              <p class="card-text">{{gallery.name}} Album | {{gallery.age}}</p>
-              <p class="card-text">{{gallery.desc}}</p>
-
-              <small class="text-body-secondary">{{gallery.created_at}} | Location {{gallery.location}}</small>
-              <div>
-                <div class="btn-group mt-2">
-                  <a href="{% url 'gallerydetail' gallery.id %}" class="btn btn-sm btn-outline-secondary">View More Pics</a>
-                  <a href="{% url 'galleryadd' gallery.id %}" class="btn btn-sm btn-outline-secondary">Add Images</a>
-                  <a href="{% url 'albumedit' gallery.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                  <a href="{% url 'delete' gallery.id %}" class="btn btn-sm btn-outline-secondary">Delete</a>
-                </div>
-                
-              </div>
-            </div>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="{{gimage.images.url}}" alt=""></text></svg>
           </div>
       </div>
-      {% endif %}
       {% empty %}
-      <p>No Albums Yet</p>
+      <p>No Images Yet</p>
       {% endfor %}
     </div>
   </div>
+
 </main>
 {% endblock %}
