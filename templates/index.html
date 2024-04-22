@@ -2,21 +2,164 @@
 {% load static %}
 {% block body %}
 
-<div class="container">
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{% static 'images/curly-girl-beautiful-dress.jpg' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-          </div>
-          <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 mr-2">Primary</button>
-              <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-            </div>
-          </div>
+<style>
+  .carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+</style>
+
+<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/adele-morris.jpg' %}"" alt="Los Angeles" class="d-block w-100 h-100" style="object-fit: cover;">
+      <div class="container">
+        <div class="carousel-caption bg-dark opacity-50 rounded">
+          <h1>Adele Morris</h1>
+          <strong><h5>6 Months Old Baby Boy</h5></strong> 
         </div>
       </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/13980.jpg' %}" alt="Los Angeles" class="d-block w-100 h-100" style="object-fit: cover;">
+      <div class="container">
+        <div class="carousel-caption bg-dark opacity-50 rounded">
+          <h1 >David Eliud</h1>
+          <p >Baby child after bath lying on bed on white blanket, looking at camera, being wrapped in towel, infant after shower, charming newborn kid.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/19527.jpg' %}" alt="Los Angeles" class="d-block w-100 h-100" style="object-fit: cover;">
+      <div class="container bg-dark">
+        <div class="carousel-caption bg-dark opacity-50 rounded">
+          <h1 >Khalif Akif</h1>
+          <p >Birthday Boy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+<div class="container">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary bg-dark d-flex align-items-center justify-content-center">
+    <div class="col-lg-6 px-0 bg-dark">
+      <h1 class="fst-italic text-white text-center">About Our Platform </h1>
+      <p class="lead my-3 text-white text-center">Welcome to our Memories Cherish, a platform dedicated to preserving your cherished memories and tracking your life's journey through captivating images.</p>
+    </div>
+  </div> 
+ </div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/girl_4.jpg' %}" class="card-img-top img-fluid rounded" alt="Girl Image">
+        </div>
+      </div>
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/baby boy 2.jpeg' %}" class="card-img-top img-fluid rounded" alt="Girl Image">
+        </div>
+      </div>
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/baby boy 4.jpg' %}" class="card-img-top img-fluid rounded" alt="Girl Image">
+        </div>
+      </div>
+  </div>
+ 
+</div>
+
+
+
+<div class="mt-4 container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <!--
+  <div class="row">
+    <div class="col-lg-4">
+      <img src="{% static 'images/girl_4.jpg' %}" alt="Your Alt Text" class="bd-placeholder-img rounded-circle" width="140" height="140">
+      <h2 class="fw-normal">Heading</h2>
+      <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+    </div><!-- /.col-lg-4 -->
+    <!--
+    <div class="col-lg-4">
+      <img src="{% static 'images/baby boy 2.jpeg' %}" alt="Your Alt Text" class="bd-placeholder-img rounded-circle" width="140" height="140">
+      <h2 class="fw-normal">Heading</h2>
+      <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+    </div><!-- /.col-lg-4 -->
+    <!--
+    <div class="col-lg-4">
+      <img src="{% static 'images/baby boy 4.jpg' %}" alt="Your Alt Text" class="bd-placeholder-img rounded-circle" width="140" height="140">
+      <h2 class="fw-normal">Heading</h2>
+      <p>And lastly this, the third column of representative placeholder content.</p>
+    </div><!-- /.col-lg-4 -->
+  <!--</div><!-- /.row -->
+
+
+ 
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1"><span class="text-body-secondary">Johnson Kamau</span></h2>
+      <p class="lead">"This album platform has truly revolutionized the way I preserve my memories. From birthdays to vacations, it's like having a digital scrapbook at my fingertips. The user-friendly interface makes it a breeze to upload and organize photos, and I appreciate the privacy options that allow me to share certain albums with specific friends and family. It's not just a storage space for images; it's a journey through my life's most precious moments. Thank you for creating such a valuable platform!"</p>
+    </div>
+    <div class="col-md-5">
+      <img src="{% static 'images/happy.jpg' %}" alt="Your Alt Text" class="bd-placeholder-img img-fluid img-thumbnail" width="400" height="550">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading fw-normal lh-1"><span class="text-body-secondary">Mary Magdalene</span></h2>
+      <p class="lead">"As someone who values the power of storytelling through visuals, this album project has become an integral part of my digital life. It's not just about storing photos; it's about curating a narrative of my experiences. Whether it's a spontaneous adventure or a milestone celebration, this platform allows me to weave together the threads of my life in a seamless and meaningful way. Plus, the ability to customize album visibility ensures that I can share my stories with the right audience, making the experience even more personal and enriching."</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img src="{% static 'images/woman.jpg' %}" alt="Your Alt Text" class="bd-placeholder-img img-fluid img-thumbnail" width="400" height="550">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading fw-normal lh-1"><span class="text-body-secondary">Ken Murio</span></h2>
+      <p class="lead">"I've tried many photo storage solutions in the past, but none have captured my heart quite like this album project. The attention to detail, from the elegant design to the robust privacy features, sets it apart from the rest. It's more than just a repository for images; it's a sanctuary for memories. I love how I can relive special moments with a single click, and the peace of mind knowing that my photos are safe and secure is priceless. Kudos to the creators for crafting such a remarkable platform that truly enhances the way we cherish our memories."</p>
+    </div>
+    <div class="col-md-5">
+      <img src="{% static 'images/ken.jpg' %}" alt="Your Alt Text" class="bd-placeholder-img img-fluid img-thumbnail" width="400" height="550">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
 </div>
 {% endblock %}
+
+class="img-fluid rounded"

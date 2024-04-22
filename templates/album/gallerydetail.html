@@ -113,7 +113,13 @@
         {% for gimage in galleryobj.images_set.all %}
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="{{gimage.images.url}}" alt=""></text></svg>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="{{gimage.images.url}}" class="img-thumbnail" alt=""></text></svg>
+            <h5 class="card-title">Image {{ forloop.counter }}</h5>
+            <a href="{{gimage.images.url}}" download class="btn btn-outline-secondary">Download <i class="fa-regular fa-download"></i></a>
+            <button class="btn btn-primary share-btn" data-image-url="{{ gimage.images.url }}">Share <i class="fa-solid fa-share"></i></button>
+          </div>
+          <div class="card-body">
+            
           </div>
       </div>
       {% empty %}
@@ -123,4 +129,25 @@
   </div>
 
 </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const shareButtons = document.querySelectorAll(".share-btn");
+
+    shareButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const imageUrl = this.getAttribute("data-image-url");
+        const url = window.location.href;
+
+        // Open Facebook share dialog
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imageUrl)}`, "_blank", "width=600,height=400");
+
+        // Open Twitter share dialog
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=Check%20out%20this%20image%20&hashtags=your,hashtags`, "_blank", "width=600,height=400");
+      });
+    });
+  });
+</script>
 {% endblock %}

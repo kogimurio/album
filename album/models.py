@@ -4,7 +4,12 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
-
+PUBLIC = 'public'
+PRIVATE = 'private'
+VISIBILITY_CHOICES = [
+        (PUBLIC, 'Public'),
+        (PRIVATE, 'Private'),
+    ]
 
 class Album(models.Model):
     name = models.CharField(max_length=700, blank=False, null=False)
@@ -15,6 +20,7 @@ class Album(models.Model):
     banner = models.ImageField(upload_to='album/banner')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+    visibility = models.CharField(max_length=10, choices=VISIBILITY_CHOICES, default=PUBLIC)
     
 
     def __str__(self):
@@ -33,3 +39,6 @@ def delete_album_images(sender, instance, **kwargs):
 
 
 post_delete.connect(delete_album_images, sender=Album)
+
+class Picha(models.Model):
+    images = models.ImageField(upload_to='src/images')

@@ -1,25 +1,49 @@
 {% extends 'base.html' %}
+
 {% block body %}
 <style>
     .custom-input {
-        width: 500px; 
+        width: 350px; 
     }
     .errorlist {
-    list-style: none; 
-    padding-left: 0; 
-    margin-top: 0; 
+        list-style: none; 
+        padding-left: 0; 
+        margin-top: 0; 
+    }
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .form-container {
+        width: 350px;
+        margin-bottom: 20px;
+    }
+    .social-login-container {
+        width: 350px;
+        text-align: center;
     }
 </style>
-<div class="mt-4 container" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
-    <div class="mt-4">
+
+<div class="login-container">
+    <div class="form-container">
         <form method="post">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="rb-4 text-center"><h2>Login Here</h2></legend><hr>
-                {{form.as_p}}
+                {% for field in form %}
+                    {% if field.name == 'password' %}
+                        {{ field }} <input type="checkbox" id="toggle-password" class="toggle-password">
+                        <label for="toggle-password" class="toggle-password">Show Password</label><br>
+                    {% else %}
+                        {{ field }} <br>
+                    {% endif %}
+                {% endfor %}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info mb-3" type="submit">Login</button>
+                <button class="btn btn-outline-info my-3 w-100" type="submit">Login</button>
             </div>
         </form>
         <div class="border-top pt-3">
@@ -32,5 +56,30 @@
             </small>
         </div>
     </div>
+    
+    <div class="social-login-container">
+        <p>Or use a third-party</p><hr class="my-4">
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+            Sign up with <i class="fa-brands fa-x-twitter"></i>
+        </button>
+        <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
+            <i class="fa-brands fa-facebook"></i>
+            Sign up with Facebook
+        </button>
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+            <i class="fa-brands fa-github"></i>
+            Sign up with GitHub
+        </button>
+    </div>
 </div>
+
+<script>
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordField = document.querySelector('#id_password');
+
+    togglePassword.addEventListener('change', function() {
+        passwordField.type = this.checked ? 'text' : 'password';
+    });
+</script>
+
 {% endblock %}

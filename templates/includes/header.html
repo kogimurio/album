@@ -1,41 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
 <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
     <div class="container d-flex flex-wrap align-items-center justify-content-between">
       <div>
         <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
-  
+
         <ul class="nav col-12 col-lg-auto mb-2 justify-content-start flex-column flex-lg-row">
           <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-white"><i class="fa-solid fa-house"></i></a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li class="nav-item"><a href="{% url 'price' %}" class="nav-link px-2 text-white">Pricing</a></li>
+          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-white">About</a></li>
         </ul>
       </div>
-        <div class="text-end align-items-end">
-        {% if user.is_authenticated and user.status == 'author' %}
-          <a href="{% url 'gallery' %}" class="btn btn-outline-success"> Gallery <i class="fa-regular fa-image"></i></a>
-        {% endif %}
-        {% if user.is_authenticated %}
-            <a href="{% url 'profile' user.username %}" class="btn btn-outline-light">{{request.user.username}} <i class="fa-solid fa-user"></i></a>
-            <a href="{% url 'logout' %}" class="btn btn-outline-info"> Logout <i class="fa-solid fa-right-from-bracket"></i></a>
-            {{request.user.username}}
-        {% else %}
-            <a href="{% url 'login' %}" class="btn btn-outline-primary"> Login <i class="fa-solid fa-right-to-bracket"></i></a>
-            <a href="{% url 'register' %}" class="btn btn-outline-info"> Register</a>
-        {% endif %}
+      <div class="text-end align-items-end">
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Account <i class="fa-regular fa-user"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            
+            {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'profile' user.username %}">{{ request.user.username }} <i class="fa-solid fa-user"></i></a></li>
+            {% if user.status == 'author' %}
+            <li><a class="dropdown-item" href="{% url 'gallery' %}">Gallery <i class="fa-regular fa-image"></i></a></li>
+            {% endif %}
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="{% url 'login' %}">Login <i class="fa-solid fa-right-to-bracket"></i></a></li>
+            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+          </ul>
         </div>
-      
+      </div>
     </div>
-</nav>
+  </nav>
 </div>
 
+<!-- Bootstrap JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- Initialization Script -->
+<script>
+  // Initialize Bootstrap components
+  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+    return new bootstrap.Dropdown(dropdownToggleEl)
+  });
+</script>
 
-  
-
-
-
-
-
+</body>
+</html>

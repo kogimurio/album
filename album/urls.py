@@ -10,5 +10,5 @@ urlpatterns = [
     path('gallerydetail/<int:pk>/', AlbumDetailsView.as_view(), name='gallerydetail'),
     path('galleryadd/<int:pk>/', GalleryAddView.as_view(), name='galleryadd'), 
     path('albumedit/<int:pk>/', AlbumEditView.as_view(), name='albumedit'), 
-
+    path('download/<int:image_id>/', views.download_image, name='download_image'),
 ]

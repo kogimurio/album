@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Album, Images
+from .models import Album, Images, Picha
 from .forms import AlbumForm
 from django.views.generic import CreateView, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, FileResponse
+import os
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 
@@ -78,8 +80,7 @@ class GalleryAddView(LoginRequiredMixin, TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated or request.user.status != 'author':
-           
-            return redirect('login')  
+            return redirect('login')
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, *args, **kwargs):
@@ -89,22 +90,37 @@ class GalleryAddView(LoginRequiredMixin, TemplateView):
 
             for image in images:
                 product_image = Images.objects.create(
-                    album = album,
-                    images = image
+                    album=album,
+                    images=image
                 )
+
+            messages.success(self.request, 'Images added successfully.')
             return redirect('gallery')
         except Exception as e:
             print(e)
-
-class AlbumEditView(LoginRequiredMixin, UpdateView):
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated or request.user.status != 'author':
-           
-            return redirect('login')  
-        return super().dispatch(request, *args, **kwargs)
-
+class AlbumEditView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Album
     form_class = AlbumForm
     template_name = 'album/albumedit.html'
     success_url = reverse_lazy('gallery')
+    success_message = "Album updated successfully"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or request.user.status != 'author':
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+
+
+def download_image(request, image_id):
+    try:
+        image = Images.objects.get(id=image_id)
+        image_path = image.images.path
+        if os.path.exists(image_path):
+            with open(image_path, 'rb') as f:
+                response = FileResponse(f)
+                response['Content-Disposition'] = 'attachment; filename="{}"'.format(os.path.basename(image_path))
+                return response
+        else:
+            return HttpResponse("File not found")
+    except Images.DoesNotExist:
+        return HttpResponse("Image does not exist")

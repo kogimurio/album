@@ -1,103 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-
-
-  <head>
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
-      }
-    </style>
-
-    
-  </head>
-  <body> 
 <main>
-
-  <section class="py-5 text-center container">
+  <section class="py-5 text-center container align-items-center">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Albums</h1>
+        <div class="d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          <h1><strong>Albums</strong></h1>
+        </div>
         <hr>
         <p>
-            <a href="{% url 'addimages' %}" class="btn btn-success btn-sm p-4">Click Me To Add Those Little Memories <i class="fa-regular fa-face-smile"></i></a> 
+          <a href="{% url 'addimages' %}" class="btn btn-primary btn-sm p-4"><i class="fa-solid fa-plus"></i> Click Me To Add Album <i class="fa-regular fa-face-smile"></i></a> 
         </p>
         <p class="lead text-body-secondary">
-            Babies Precious Life Memories Journey
+          <h4>Babies Precious Life Memories Journey</h4>
         </p>
       </div>
     </div>
@@ -105,35 +25,31 @@
  
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for gallery in gallery %}
         {% if gallery.author == request.user %}
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><img src="{{gallery.banner.url}}" class="img-thumbnail" alt=""></text></svg>
             <div class="card-body">
-                <p class="card-text tw-3">{{gallery.title}}</p>
+              <img src="{{gallery.banner.url}}" class="card-img-top img-fluid rounded mb-3" alt="Banner Image">
+              <strong><p class="card-text fw-bold">{{gallery.title}}</p></strong>
               <p class="card-text">{{gallery.name}} Album | {{gallery.age}}</p>
               <p class="card-text">{{gallery.desc}}</p>
-
-              <small class="text-body-secondary">{{gallery.created_at}} | Location {{gallery.location}}</small>
-              <div>
-                <div class="btn-group mt-2">
-                  <a href="{% url 'gallerydetail' gallery.id %}" class="btn btn-sm btn-outline-secondary">View More Pics</a>
-                  <a href="{% url 'galleryadd' gallery.id %}" class="btn btn-sm btn-outline-secondary">Add Images</a>
-                  <a href="{% url 'albumedit' gallery.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                  <a href="{% url 'delete' gallery.id %}" class="btn btn-sm btn-outline-secondary">Delete</a>
-                </div>
-                
+              <small class="text-muted">{{gallery.created_at}} | <i>Location {{gallery.location}}</i> </small>
+              <div class="btn-group mt-2">
+                <a href="{% url 'gallerydetail' gallery.id %}" class="btn btn-sm btn-outline-secondary">View More Pics</a>
+                <a href="{% url 'galleryadd' gallery.id %}" class="btn btn-sm btn-outline-secondary">Add Images</a>
+                <a href="{% url 'albumedit' gallery.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'delete' gallery.id %}" class="btn btn-sm btn-outline-secondary">Delete</a>
               </div>
             </div>
           </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <p>No Albums Yet</p>
+        {% endfor %}
       </div>
-      {% endif %}
-      {% empty %}
-      <p>No Albums Yet</p>
-      {% endfor %}
     </div>
   </div>
 </main>

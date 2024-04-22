@@ -4,14 +4,22 @@
     .custom-input {
         width: 600px;
     }
+    .profile-image{
+    max-width: 150px;
+    max-height: 150px;
+    width: auto; /* Ensure image maintains aspect ratio */
+    height: auto; /* Ensure image maintains aspect ratio */
+    padding: 5px;
+    }
 </style>
     <div class="container mt-4" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
         <div class="mt-4">
            <h2 class="text-center">Update Your Profile</h2>
         <form method="post" enctype="multipart/form-data">
+            <img class="rounded-circle img-fluid account-img profile-image" src="{{form.instance.image.url}}" alt="">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="Update">
+            <input type="submit" value="Update" class="btn btn-sm btn-outline-primary">
         </form> 
         </div>
         

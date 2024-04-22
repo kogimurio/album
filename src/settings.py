@@ -139,6 +139,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL =  'home'
 
+#reCaptcha settings
 RECAPTCHA_PUBLIC_KEY = '6LeNp7gpAAAAAETUm9uyLwEjTaiiT6v7Y14kYdct'
 RECAPTCHA_PRIVATE_KEY = '6LeNp7gpAAAAAC9a1cM4uW7f7XhhkrGqjOwU5ONk'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+#Emailing settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'LittleLifeLogs'
+EMAIL_HOST_USER = 'kogimurio@gmail.com'
+EMAIL_HOST_PASSWORD = 'uyvcheymglcxfqfw'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+PASSWORD_RESET_TIMEOUT = 14400
