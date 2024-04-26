@@ -1,7 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm, AuthenticationForm, PasswordResetForm
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox, ReCaptchaV2Invisible, ReCaptchaV3
 
@@ -91,4 +90,26 @@ class ProfileUpdateForm(forms.ModelForm):
     description = forms.CharField(widget=forms.TextInput(
             attrs={'class': 'form-control custom-input', 'placeholder': 'Description'}),
             label='Description')
+
+
+class SetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['new_password1', 'new_password2']
+
+    new_password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control custom-input', 'placeholder': 'Password'}))
+    
+    new_password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control custom-input', 'placeholder': 'Password Again'}))
+    
+
+class PasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+    
+    email = forms.CharField(widget=forms.EmailInput(
+            attrs={'class': 'form-control custom-input', 'placeholder': 'Email'}))
+    
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
